@@ -1,43 +1,43 @@
 package robot;
 
+import java.util.ArrayList;
+
 public class Action {
     public static void main(String[] args) {
-        Robot workingRobot;
-        Robot robot = new Robot();
-        Robot robot1 = new Robot();
-        ListOfRobots.addRobot(robot);
-        ListOfRobots.addRobot(robot1);
-        String robotsName;
-        int countsOfRobot = 2;
-        for (int i = 0; i <
-                countsOfRobot; i++) {
+        Robot workingRobot = null;
+        MenuRobots.printMenuRobots();
+        Robot robot = new Robot(MenuRobots.getStringFromConsole(workingRobot));
+        MenuRobots.printMenuRobots();
+        Robot robot1 = new Robot(MenuRobots.getStringFromConsole(workingRobot));
+        ArrayList<Robot> robotArrayList = new ArrayList<>();
+        robotArrayList.add(robot);
+        robotArrayList.add(robot1);
+        String menuAction;
 
-            do {
-                MenuRobots.printMenuRobots();
-                robotsName = MenuRobots.getLetterFromConsole();
-                if (robotsName.equals("")) {
-                    System.out.println("Name for robot not entered! Enter robot's name: ");
-                    continue;
+        String keys = "QWEASDZXCL";
+        boolean exitFromMenuAction = false;
+        boolean emptyHealthy = false;
+        do {
+            for (int i = 0; i < robotArrayList.size(); i++) {
+
+                workingRobot = robotArrayList.get(i);
+
+                MenuAction.printMenuAction(workingRobot);
+                menuAction = MenuAction.getStringFromConsole(workingRobot);
+                exitFromMenuAction = menuAction.equalsIgnoreCase("l");
+
+
+                if (!keys.toLowerCase().contains(menuAction)) {
+                    System.out.println("Entered letter " + menuAction + " is empty in list for shooting");
+                } else if (exitFromMenuAction||emptyHealthy) {
+                    break;
                 } else {
-                    System.out.println("Your robot's name is " + robotsName);
-                    workingRobot = MenuRobots.setRobotName (robotsName);
-
-                    boolean exitFromMenuAction;
-                    do {
-                        MenuAction.printMenuAction(workingRobot);
-                        String menuAction = MenuAction.getLetterFromConsole();
-                        exitFromMenuAction = menuAction.equalsIgnoreCase("L");
-                        if (exitFromMenuAction) {
-                            //  System.out.println(menuAction);
-                            MenuAction.actionInMenuAction(workingRobot, menuAction);
-                        }
-                    } while (exitFromMenuAction);
+                    workingRobot.shootingToRobot(workingRobot, menuAction);
                 }
-            } while (
-                    countsOfRobot != 2);
-
-        }
+            }
+        } while ((exitFromMenuAction != true)||(emptyHealthy !=true));
     }
 }
+
 
 

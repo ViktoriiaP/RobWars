@@ -3,47 +3,45 @@ package robot;
 import java.util.Random;
 
 public class Robot {
-    private String shooting="QWEASDZXC";
-    private String keys = "QWEASDZXCL";
-    private int healthy=100;
-    private String listOfDemageRobot = "";
+    private String listOfLetter = "QWEASDZXC";
+    public int healthy = 100;
+    private String keysDemageRobot = "";
+    public String robotName;
 
 
-    public Robot() {
-    }
-
-    public int getHealthy(String workingRobot) {
-        return healthy-20;
-    }
-
-    char getRandomKey(){
-        int randIdx = new Random().nextInt(shooting.length());
-        char randChar = listOfDemageRobot.charAt(randIdx);
-        listOfDemageRobot = listOfDemageRobot.replace(String.valueOf(randChar), "");
-        return randChar;
-    }
-
-    public Robot (String robotName, String listOfDemageRobot ) { // generate random damageList for robot
-        //name from console
-        for (int i = 0; i <5 ; i++) {
-            listOfDemageRobot=listOfDemageRobot + getRandomKey();
+    public Robot(String workingRobot) {
+        robotName = workingRobot;
+        for (int i = 0; i < 5; i++) {
+            keysDemageRobot = keysDemageRobot + getRandomKey();
         }
         System.out.println();
     }
 
-    public void shootingToRobot(String robotName, String shootingLetter) {
-        if (listOfDemageRobot.trim().toLowerCase().startsWith(shootingLetter)){
-            System.out.println("Good shoot!" + getHealthy(robotName));
-        }
-        else if (shootingLetter.trim().toLowerCase().contains("L")){
-            System.out.println("Wrong letter");
-
-        } else {
-            System.out.println("Miss shoot");
-        }
+    public int getHealthy(Robot workingRobot) {
+        return healthy;
     }
 
-    public String getRobotName() {
-    return "Name";
+    public void setHealthy(int healthy) {
+        this.healthy = healthy;
+    }
+
+    char getRandomKey() {
+        int randIdx = new Random().nextInt(listOfLetter.length());
+        char randChar = listOfLetter.charAt(randIdx);
+        listOfLetter = listOfLetter.replace(String.valueOf(randChar), "");
+        return randChar;
+    }
+
+    public void shootingToRobot(Robot workingRobot, String menuAction) {
+        if (keysDemageRobot.toLowerCase().contains(menuAction)) {
+            keysDemageRobot = keysDemageRobot.toLowerCase().replace((menuAction), "").trim();
+            workingRobot.setHealthy(healthy - 20);
+            System.out.println("Good shoot! The healthy of robot " + workingRobot.robotName + " after shooting is: " + getHealthy(workingRobot));
+        } else if (keysDemageRobot.equals("")) {
+            System.out.println("The healthy of robot :" + workingRobot + workingRobot.getHealthy(workingRobot) + " Game over");
+        } else {
+            System.out.println("Miss shoot to robot: " + workingRobot.robotName);
+        }
     }
 }
+
