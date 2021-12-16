@@ -30,6 +30,8 @@ public class Action {
 
                 if (workingRobot.getHealthy (workingRobot) <= 0) {
                     isAlive = 0;
+                } else if (menuAction.isEmpty()){
+                    System.out.println("Enter the letter, your field can not be empty");
                 } else if (!keys.toLowerCase().contains(menuAction)) {
                     System.out.println("Entered letter " + menuAction + " is empty in list for shooting");
                 } else if (exitFromMenuAction) {
