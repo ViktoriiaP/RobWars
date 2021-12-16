@@ -37,8 +37,8 @@ public class Robot {
             keysDemageRobot = keysDemageRobot.toLowerCase().replace((menuAction), "").trim();
             workingRobot.setHealthy(healthy - 20);
             System.out.println("Good shoot! The healthy of robot " + workingRobot.robotName + " after shooting is: " + getHealthy(workingRobot));
-        } else if (keysDemageRobot.equals("")) {
-            System.out.println("The healthy of robot :" + workingRobot + workingRobot.getHealthy(workingRobot) + " Game over");
+        } else if (workingRobot.keysDemageRobot.equals("")) {
+            System.out.println("The healthy of robot :" +workingRobot.robotName + " " +workingRobot.getHealthy(workingRobot) + " Game over");
         } else {
             System.out.println("Miss shoot to robot: " + workingRobot.robotName);
         }

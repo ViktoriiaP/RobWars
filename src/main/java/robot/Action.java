@@ -25,17 +25,17 @@ public class Action {
                 MenuAction.printMenuAction(workingRobot);
                 menuAction = MenuAction.getStringFromConsole(workingRobot);
                 exitFromMenuAction = menuAction.equalsIgnoreCase("l");
-
+                emptyHealthy = workingRobot.getHealthy(workingRobot)<=0;
 
                 if (!keys.toLowerCase().contains(menuAction)) {
                     System.out.println("Entered letter " + menuAction + " is empty in list for shooting");
-                } else if (exitFromMenuAction||emptyHealthy) {
+                } else if (exitFromMenuAction) {
                     break;
                 } else {
                     workingRobot.shootingToRobot(workingRobot, menuAction);
                 }
             }
-        } while ((exitFromMenuAction != true)||(emptyHealthy !=true));
+        } while ((exitFromMenuAction!= true) || (emptyHealthy = true));
     }
 }
 
