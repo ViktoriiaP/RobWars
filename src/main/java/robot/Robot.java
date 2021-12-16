@@ -32,16 +32,19 @@ public class Robot {
         return randChar;
     }
 
-    public void shootingToRobot(Robot workingRobot, String menuAction) {
+    public int shootingToRobot(Robot workingRobot, String menuAction) {
+        int isAlive = 1;
         if (keysDemageRobot.toLowerCase().contains(menuAction)) {
             keysDemageRobot = keysDemageRobot.toLowerCase().replace((menuAction), "").trim();
             workingRobot.setHealthy(healthy - 20);
             System.out.println("Good shoot! The healthy of robot " + workingRobot.robotName + " after shooting is: " + getHealthy(workingRobot));
-        } else if (workingRobot.keysDemageRobot.equals("")) {
-            System.out.println("The healthy of robot :" +workingRobot.robotName + " " +workingRobot.getHealthy(workingRobot) + " Game over");
         } else {
             System.out.println("Miss shoot to robot: " + workingRobot.robotName);
         }
+        if (workingRobot.getHealthy(workingRobot) <= 0) {
+            isAlive = 0;
+        }
+        return isAlive;
     }
 }
 

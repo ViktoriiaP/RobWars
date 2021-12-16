@@ -16,8 +16,10 @@ public class Action {
 
         String keys = "QWEASDZXCL";
         boolean exitFromMenuAction = false;
-        boolean emptyHealthy = false;
-        do {
+        int isAlive = 1;
+
+        while (exitFromMenuAction != true && isAlive == 1) {
+
             for (int i = 0; i < robotArrayList.size(); i++) {
 
                 workingRobot = robotArrayList.get(i);
@@ -25,17 +27,22 @@ public class Action {
                 MenuAction.printMenuAction(workingRobot);
                 menuAction = MenuAction.getStringFromConsole(workingRobot);
                 exitFromMenuAction = menuAction.equalsIgnoreCase("l");
-                emptyHealthy = workingRobot.getHealthy(workingRobot)<=0;
 
-                if (!keys.toLowerCase().contains(menuAction)) {
+                if (workingRobot.getHealthy (workingRobot) <= 0) {
+                    isAlive = 0;
+                } else if (!keys.toLowerCase().contains(menuAction)) {
                     System.out.println("Entered letter " + menuAction + " is empty in list for shooting");
                 } else if (exitFromMenuAction) {
-                    break;
+                    return;
                 } else {
-                    workingRobot.shootingToRobot(workingRobot, menuAction);
+                    isAlive = workingRobot.shootingToRobot(workingRobot, menuAction);
+                }
+                if (isAlive == 0) {
+                    break;
                 }
             }
-        } while ((exitFromMenuAction!= true) || (emptyHealthy = true));
+        }
+        System.out.println("The healthy of robot : " + workingRobot.robotName + " is " + workingRobot.healthy + ". GAME OVER :(");
     }
 }
 
